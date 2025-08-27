@@ -24,8 +24,13 @@ public class ProductController {
     }
 
     @GetMapping("/fetch/all")
-    public ResponseEntity<List<Product>> fetchProducts() throws Exception {
-        apiService.fetchAndSaveProducts();
+    public ResponseEntity<List<Product>> fetchProducts() {
+
+        try {
+            apiService.fetchAndSaveProducts();
+        } catch (Exception e) {
+            System.out.println("There was a problem fetching the products");
+        }
         return ResponseEntity.ok().body(productRepository.findAll());
     }
 }
