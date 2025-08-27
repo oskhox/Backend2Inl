@@ -19,21 +19,18 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    ProductRepository productRepository;
     ApiService apiService;
 
-    public ProductController(ProductRepository productRepository, ApiService apiService) {
-        this.productRepository = productRepository;
+    public ProductController(ApiService apiService) {
         this.apiService = apiService;
 
     }
-
 
     @GetMapping("/products")
     public String showProducts(Model model) {
         try {
             apiService.fetchAndSaveProducts();
-            List<Product> products = productRepository.findAll();
+            List<Product> products = apiService.getAllProducts();
 
             model.addAttribute("products", products);
             model.addAttribute("pageTitle", "Produkter");
@@ -51,12 +48,15 @@ public class ProductController {
 
 
 
-
+/*
     //RESTAPI
 
     @GetMapping("/fetch/all")
     public ResponseEntity<List<Product>> fetchProducts() throws Exception {
         apiService.fetchAndSaveProducts();
-        return ResponseEntity.ok().body(productRepository.findAll());
+        return ResponseEntity.ok().body(ap.findAll());
     }
+
+    */
+
 }

@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 @Component
 public class ApiService {
@@ -41,5 +42,9 @@ public class ApiService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
     }
 }
