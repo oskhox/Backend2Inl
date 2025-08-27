@@ -37,32 +37,5 @@ public class ApiService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
-
-
-        //        ObjectMapper mapper = new ObjectMapper();
-//        URL url = new URL("https://fakestoreapi.com/products");
-//        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-//        con.setRequestMethod("GET");
-//        con.connect();
-
-//        try (BufferedReader in = new BufferedReader(new InputStreamReader(response.getBody()))) {
-//            StringBuilder sb = new StringBuilder();
-//            String line;
-//            while ((line = in.readLine()) != null) {
-//                sb.append(line);
-//            }
-//
-//            Product[] products = mapper.readValue(sb.toString(), Product[].class);
-//
-//            for (Product p : products) {
-//                productRepository.save(p);
-//                System.out.println("Saved product: " + p.getTitle());
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 }
