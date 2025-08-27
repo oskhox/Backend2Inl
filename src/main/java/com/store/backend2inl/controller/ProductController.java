@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+//TODO: Gör om till Controller för Thymeleaf
 @RestController
 public class ProductController {
 
