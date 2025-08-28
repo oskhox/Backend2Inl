@@ -16,8 +16,6 @@ public class ApiService {
     }
 
     public void fetchAndSaveProducts() {
-
-
         RestTemplate restTemplate = new RestTemplate();
         String url = "https://fakestoreapi.com/products";
         try {
