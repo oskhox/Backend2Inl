@@ -21,7 +21,7 @@ public class ApiService {
         try {
             ResponseEntity<Product[]> response = restTemplate.getForEntity(url, Product[].class);
             Product[] products = response.getBody();
-            if(products != null) {
+            if (products != null) {
                 for (Product p : products) {
                     productRepository.save(p);
                     System.out.println("Saved product " + p.getTitle());
