@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-//TODO: Gör om till Controller för Thymeleaf
-
-//@Controller
-@RestController
+@Controller
 public class ProductController {
 
     @Autowired
@@ -23,7 +20,6 @@ public class ProductController {
 
     public ProductController(ApiService apiService) {
         this.apiService = apiService;
-
     }
 
     @GetMapping("/products")
@@ -45,8 +41,6 @@ public class ProductController {
         }
         return "products";
     }
-
-
 
 /*
     //RESTAPI
