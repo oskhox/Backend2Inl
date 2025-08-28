@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <title>Alla Produkter</title>
+</head>
+<body>
+<h1 th:text="${pageTitle}"></h1>
+
+<div class="products-container">
+    <div th:each="product : ${products}" class="product-display">
+        <img th:src="${product.image}" class="product-display-img-top" alt="Produktbild"/>
+        <div class="product-display-body">
+            <div class="product-display-title" th:text="${product.title}"></div>
+            <div class="product-display-text">
+                <p><strong>Pris:</strong> <span th:text="${product.price}"></span></p>
+                <p th:text="${product.description}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:if="${errorMessage}">
+    <p style="color:red;" th:text="${errorMessage}"></p>
+</div>
+</body>
+</html>

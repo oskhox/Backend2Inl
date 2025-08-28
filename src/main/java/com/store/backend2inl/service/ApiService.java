@@ -32,4 +32,8 @@ public class ApiService {
             e.printStackTrace();
         }
     }
+
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
 }
