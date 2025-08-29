@@ -12,7 +12,7 @@ public class IntegrationTestIT {
 
     @Test
     void shouldReturnJSONFromApi() {
-        System.out.println("Testing if it contains title");
+        System.out.println("Testing if it contains all attributes");
         assertTrue(json.contains("id"));
         assertTrue(json.contains("title"));
         assertTrue(json.contains("price"));
@@ -20,5 +20,7 @@ public class IntegrationTestIT {
         assertTrue(json.contains("category"));
         assertTrue(json.contains("image"));
         assertTrue(json.contains("rating"));
+        assertTrue(json.contains("rate"));
+        assertTrue(json.contains("count"));
     }
 }
