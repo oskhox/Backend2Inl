@@ -40,3 +40,15 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+tasks.register('integrationTest', Test) {
+    group = 'verification'
+    description = 'Runs the integration tests,'
+    useJUnitPlatform()
+    filter {
+        includeTestsMatching("*IT")
+    }
+    testLogging {
+        events 'passed', 'failed', 'skipped'
+    }
+}
