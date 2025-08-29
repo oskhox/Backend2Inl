@@ -13,18 +13,12 @@ public class IntegrationTestIT {
     @Test
     void shouldReturnJSONFromApi() {
         System.out.println("Testing if it contains title");
+        assertTrue(json.contains("id"));
         assertTrue(json.contains("title"));
-    }
-
-    @Test
-    void shouldReturnJSONFromApi2() {
-        System.out.println("Testing if it contains price");
         assertTrue(json.contains("price"));
-    }
-
-    @Test
-    void shouldReturnJSONFromApi3() {
-        System.out.println("Testing if specific product is present");
-        assertTrue(json.contains("Fjallraven"));
+        assertTrue(json.contains("description"));
+        assertTrue(json.contains("category"));
+        assertTrue(json.contains("image"));
+        assertTrue(json.contains("rating"));
     }
 }
