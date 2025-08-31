@@ -21,6 +21,7 @@ public class ProductController {
 
     public ProductController(ApiService apiService) {
         this.apiService = apiService;
+
     }
 
     @GetMapping("/products")
@@ -42,6 +43,8 @@ public class ProductController {
         }
         return "products";
     }
+
+
 
 /*
     //RESTAPI
