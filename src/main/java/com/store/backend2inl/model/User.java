@@ -20,4 +20,8 @@ public class User {
     @Getter
     private String password;
 
+    @Setter
+    @Getter
+    private String role;
+
 }
