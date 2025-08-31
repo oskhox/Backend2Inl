@@ -3,18 +3,24 @@ package com.store.backend2inl.service;
 
 import com.store.backend2inl.model.Product;
 import com.store.backend2inl.repository.ProductRepository;
+import jakarta.annotation.PostConstruct;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-@Component
+@Service
 public class ApiService {
 
     ProductRepository productRepository;
     public ApiService(ProductRepository productRepository) {
         this.productRepository = productRepository;
+    }
+
+    @PostConstruct
+    public void init() {
+        fetchAndSaveProducts();
     }
 
     public void fetchAndSaveProducts() {

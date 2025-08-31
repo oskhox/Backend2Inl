@@ -3,6 +3,7 @@ package com.store.backend2inl.controller;
 
 import com.store.backend2inl.model.User;
 import com.store.backend2inl.repository.UserRepo;
+import com.store.backend2inl.service.ApiService;
 import com.store.backend2inl.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,6 +20,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private ApiService apiService;
 
     @GetMapping("/login")
     public String login(Model model){
@@ -47,7 +50,9 @@ public class UserController {
         userRepo.save(user);
 
         model.addAttribute("success" , "User registered successfully!");
-        return "/login";
+        model.addAttribute("user" , user);
+        model.addAttribute("password" , password);
+        return "login";
     }
 
     @PostMapping("/login")
@@ -57,13 +62,12 @@ public class UserController {
         return userService.findUserByUsername(username).
                 filter(user -> new BCryptPasswordEncoder().matches(password, user.getPassword())).
                 map(user -> {
-                    model.addAttribute("username" , user.getUsername());
+                    model.addAttribute("pageTitle" , "Alla produkter");
+                    model.addAttribute("products", apiService.getAllProducts());
                     return "products";
                 }).orElseGet(() -> {
-                    User failedUser = new User();
-                    failedUser.setUsername(username);
-                    model.addAttribute("user" , failedUser);
-                    model.addAttribute("error" , "Incorrect username or password!");
+                    model.addAttribute("user" , new User());
+                    model.addAttribute("errorMessage" , "Incorrect username or password!");
                     return "login";
                 });
 
