@@ -12,10 +12,10 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-    private UserRepo userrepo;
+    private UserRepo userRepo;
 
-    public Optional<String> findUserByName(String username){
+    public Optional<User> findUserByUsername(String username){
 
-        return userrepo.findUserByName(username).map(User::getUsername);
+        return userRepo.findByUsername(username);
     }
 }

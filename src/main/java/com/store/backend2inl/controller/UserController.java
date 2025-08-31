@@ -36,7 +36,7 @@ public class UserController {
     public String registerUser(@RequestParam String username,
                                @RequestParam String password,
                                Model model){
-        if(userRepo.findUserByName(username).isPresent()){
+        if(userRepo.findByUsername(username).isPresent()){
             model.addAttribute("error" , "That username is already taken!");
             return "register";
         }
@@ -44,19 +44,20 @@ public class UserController {
         user.setUsername(username);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(password));
-        model.addAttribute("user" , user);
         userRepo.save(user);
-        return "redirect:/login";
+
+        model.addAttribute("success" , "User registered successfully!");
+        return "/login";
     }
 
     @PostMapping("/login")
     public String login(@RequestParam String username,
                         @RequestParam String password,
                         Model model){
-        return userService.findUserByName(username).
-                filter(hashed -> new BCryptPasswordEncoder().matches(password, hashed)).
-                map(found -> {
-                    model.addAttribute("username" , username);
+        return userService.findUserByUsername(username).
+                filter(user -> new BCryptPasswordEncoder().matches(password, user.getPassword())).
+                map(user -> {
+                    model.addAttribute("username" , user.getUsername());
                     return "products";
                 }).orElseGet(() -> {
                     User failedUser = new User();
