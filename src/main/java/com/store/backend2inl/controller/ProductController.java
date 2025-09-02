@@ -2,7 +2,7 @@ package com.store.backend2inl.controller;
 
 import com.store.backend2inl.model.Product;
 import com.store.backend2inl.repository.ProductRepository;
-import com.store.backend2inl.service.ApiService;
+import com.store.backend2inl.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,18 +17,17 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    ApiService apiService;
+    ProductService productService;
 
-    public ProductController(ApiService apiService) {
-        this.apiService = apiService;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
 
     }
 
     @GetMapping("/products")
     public String showProducts(Model model) {
         try {
-            apiService.fetchAndSaveProducts();
-            List<Product> products = apiService.getAllProducts();
+            List<Product> products = productService.getAllProducts();
 
             model.addAttribute("products", products);
             model.addAttribute("pageTitle", "Produkter");

@@ -3,7 +3,7 @@ package com.store.backend2inl.controller;
 
 import com.store.backend2inl.model.User;
 import com.store.backend2inl.repository.UserRepo;
-import com.store.backend2inl.service.ApiService;
+import com.store.backend2inl.service.ProductService;
 import com.store.backend2inl.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,9 +21,9 @@ public class UserController {
     @Autowired
     private UserRepo userRepo;
     @Autowired
-    private ApiService apiService;
+    ProductService productService;
 
-    @GetMapping("/login")
+        @GetMapping("/login")
     public String login(Model model){
         model.addAttribute("user" , new User());
         return "login";
@@ -63,7 +63,7 @@ public class UserController {
                 filter(user -> new BCryptPasswordEncoder().matches(password, user.getPassword())).
                 map(user -> {
                     model.addAttribute("pageTitle" , "Alla produkter");
-                    model.addAttribute("products", apiService.getAllProducts());
+                    model.addAttribute("products", productService.getAllProducts());
                     return "products";
                 }).orElseGet(() -> {
                     model.addAttribute("user" , new User());

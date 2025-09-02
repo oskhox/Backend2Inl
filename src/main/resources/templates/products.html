@@ -16,6 +16,9 @@
                 <p><strong>Pris:</strong> <span th:text="${product.price}"></span></p>
                 <p th:text="${product.description}"></p>
             </div>
+            <form th:action="@{/orders/products/{id}(id=${product.id})}" method="post">
+                <button type="submit">Köp</button>
+            </form>
         </div>
     </div>
 </div>
