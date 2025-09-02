@@ -30,6 +30,4 @@ public class CustomerOrderController {
 
         return "redirect:/products";
     }
-
-
 }

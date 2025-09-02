@@ -1,18 +1,14 @@
 package com.store.backend2inl.controller;
 
 import com.store.backend2inl.model.Product;
-import com.store.backend2inl.repository.ProductRepository;
 import com.store.backend2inl.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-//@RestController
 @Controller
 public class ProductController {
 
@@ -21,7 +17,6 @@ public class ProductController {
 
     public ProductController(ProductService productService) {
         this.productService = productService;
-
     }
 
     @GetMapping("/products")
@@ -42,26 +37,4 @@ public class ProductController {
         }
         return "products";
     }
-
-
-
-/*
-    //RESTAPI
-
-    @GetMapping("/fetch/all")
-    public ResponseEntity<List<Product>> fetchProducts() throws Exception {
-        apiService.fetchAndSaveProducts();
-        return ResponseEntity.ok().body(ap.findAll());
-    public ResponseEntity<List<Product>> fetchProducts() {
-
-        try {
-            apiService.fetchAndSaveProducts();
-        } catch (Exception e) {
-            System.out.println("There was a problem fetching the products");
-        }
-        return ResponseEntity.ok().body(productRepository.findAll());
-    }
-
-    */
-
 }

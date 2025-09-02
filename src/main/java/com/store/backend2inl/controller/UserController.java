@@ -1,6 +1,5 @@
 package com.store.backend2inl.controller;
 
-
 import com.store.backend2inl.model.User;
 import com.store.backend2inl.repository.UserRepo;
 import com.store.backend2inl.service.ProductService;
@@ -23,7 +22,7 @@ public class UserController {
     @Autowired
     ProductService productService;
 
-        @GetMapping("/login")
+    @GetMapping("/login")
     public String login(Model model){
         model.addAttribute("user" , new User());
         return "login";
