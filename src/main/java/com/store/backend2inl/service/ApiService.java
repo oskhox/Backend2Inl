@@ -31,8 +31,7 @@ public class ApiService {
             Product[] products = response.getBody();
             if (products != null) {
                 for (Product p : products) {
-                    Product entity = mapApiProductToEntity(p);
-                    productRepository.save(entity);
+                    productRepository.save(p);
                     System.out.println("Saved product " + p.getTitle());
                 }
             }
@@ -41,16 +40,4 @@ public class ApiService {
             e.printStackTrace();
         }
     }
-
-    private Product mapApiProductToEntity(Product apiProduct) {
-        Product entity = new Product();
-        entity.setId(null);
-        entity.setTitle(apiProduct.getTitle());
-        entity.setPrice(apiProduct.getPrice());
-        entity.setDescription(apiProduct.getDescription());
-        entity.setCategory(apiProduct.getCategory());
-        entity.setImage(apiProduct.getImage());
-        return entity;
-    }
-
 }

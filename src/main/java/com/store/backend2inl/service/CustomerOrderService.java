@@ -19,7 +19,7 @@ public class CustomerOrderService {
         this.productRepository = productRepository;
     }
 
-    public void buyProduct(User user, Long productId) {
+    public CustomerOrder buyProduct(User user, Long productId) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Produkten hittades ej"));
 
@@ -28,6 +28,6 @@ public class CustomerOrderService {
         order.setProduct(product);
         order.setOrderDate(LocalDateTime.now());
 
-        customerOrderRepository.save(order);
+        return customerOrderRepository.save(order);
     }
 }
