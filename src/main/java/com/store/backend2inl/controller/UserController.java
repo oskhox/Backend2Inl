@@ -6,9 +6,11 @@ import com.store.backend2inl.service.ProductService;
 import com.store.backend2inl.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -17,16 +19,23 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
     @Autowired
     private UserRepo userRepo;
     @Autowired
     ProductService productService;
 
-    @GetMapping("/login")
-    public String login(Model model){
-        model.addAttribute("user" , new User());
-        return "login";
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @PostMapping("/register")
+    public String register(@ModelAttribute User user) {
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
+    user.setRole("ROLE_" + user.getRole().toUpperCase());
+    userRepo.save(user);
+    return "redirect:/login";
     }
+
 
     @GetMapping("/register")
     public String register(Model model){
@@ -34,6 +43,32 @@ public class UserController {
         return "register";
     }
 
+    @GetMapping("/")
+    public String home() {
+        return "home";
+    }
+
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin";
+    }
+
+
+
+    /*
+    @GetMapping("/login")
+    public String login(Model model){
+        model.addAttribute("user" , new User());
+        return "login";
+    }
+*/
+/*
     @PostMapping("/register")
     public String registerUser(@RequestParam String username,
                                @RequestParam String password,
@@ -53,7 +88,9 @@ public class UserController {
         model.addAttribute("password" , password);
         return "login";
     }
+*/
 
+    /*
     @PostMapping("/login")
     public String login(@RequestParam String username,
                         @RequestParam String password,
@@ -71,4 +108,7 @@ public class UserController {
                 });
 
     }
+
+
+     */
 }
