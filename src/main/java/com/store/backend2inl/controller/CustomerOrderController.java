@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("/orders")
+@RequestMapping("/products")
 public class CustomerOrderController {
 
     private final CustomerOrderService orderService;
@@ -21,7 +21,7 @@ public class CustomerOrderController {
         this.userService = userService;
     }
 
-    @PostMapping("/products/{productId}")
+    @PostMapping("/{productId}")
     public String buyProduct(@PathVariable Long productId, Principal principal) {
         User user = userService.findUserByUsername(principal.getName())
                 .orElseThrow(() -> new RuntimeException("Användare ej hittad"));
