@@ -31,8 +31,14 @@ public class ApiService {
             Product[] products = response.getBody();
             if (products != null) {
                 for (Product p : products) {
-                    productRepository.save(p);
-                    System.out.println("Saved product " + p.getTitle());
+                    Product product = new Product();
+                    product.setTitle(p.getTitle());
+                    product.setPrice(p.getPrice());
+                    product.setDescription(p.getDescription());
+                    product.setCategory(p.getCategory());
+                    product.setImage(p.getImage());
+                    productRepository.save(product);
+                    //System.out.println("Saved product " + p.getTitle());
                 }
             }
         } catch (Exception e) {
