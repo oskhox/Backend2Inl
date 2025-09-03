@@ -14,6 +14,10 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    public Product getProductById(Long productId) {
+        return productRepository.findById(productId)
+                .orElseThrow(() -> new RuntimeException("Produkten hittades ej"));
+    }
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();

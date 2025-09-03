@@ -5,6 +5,7 @@ import com.store.backend2inl.model.Product;
 import com.store.backend2inl.repository.CustomerOrderRepository;
 import com.store.backend2inl.repository.ProductRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -12,17 +13,16 @@ import java.time.LocalDateTime;
 public class CustomerOrderService {
 
     private final CustomerOrderRepository customerOrderRepository;
-    private final ProductRepository productRepository;
+    private final ProductService productService;
 
-    public CustomerOrderService(CustomerOrderRepository customerOrderRepository, ProductRepository productRepository) {
+    public CustomerOrderService(CustomerOrderRepository customerOrderRepository, ProductService productService) {
         this.customerOrderRepository = customerOrderRepository;
-        this.productRepository = productRepository;
+        this.productService = productService;
     }
 
+    @Transactional
     public CustomerOrder buyProduct(User user, Long productId) {
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new RuntimeException("Produkten hittades ej"));
-
+        Product product = productService.getProductById(productId);
         CustomerOrder order = new CustomerOrder();
         order.setUser(user);
         order.setProduct(product);
@@ -30,4 +30,5 @@ public class CustomerOrderService {
 
         return customerOrderRepository.save(order);
     }
+
 }

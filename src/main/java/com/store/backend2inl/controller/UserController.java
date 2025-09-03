@@ -2,10 +2,7 @@ package com.store.backend2inl.controller;
 
 import com.store.backend2inl.model.User;
 import com.store.backend2inl.repository.UserRepo;
-import com.store.backend2inl.service.ProductService;
-import com.store.backend2inl.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +39,6 @@ public class UserController {
     public String home() {
         return "home";
     }
-
 
     @GetMapping("/login")
     public String login() {
