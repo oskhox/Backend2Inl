@@ -18,12 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private UserRepo userRepo;
-    @Autowired
-    ProductService productService;
 
     @Autowired
     PasswordEncoder passwordEncoder;
