@@ -29,26 +29,12 @@ public class CustomerOrderController {
     public String orders() {
         return "orders";
     }
-/*
+
     @PostMapping("/{productId}")
     public String buyProduct(@PathVariable Long productId, Principal principal) {
-        User user = userService.findUserByUsername(principal.getName())
-                .orElseThrow(() -> new RuntimeException("Användare ej hittad"));
-
-        orderService.buyProduct(user, productId);
-
-        return "redirect:/products";
-    }
-*/
-    @PostMapping("/{productId}")
-    public String buyProduct(@PathVariable Long productId, Principal principal) {
-        System.out.println("Principal name: " + principal.getName());
 
         User user = userService.findUserByUsername(principal.getName())
                 .orElseThrow(() -> new RuntimeException("Användare ej hittad"));
-
-        System.out.println("Hittad user id: " + user.getId());
-
         orderService.buyProduct(user, productId);
 
         return "/orderConfirmation";
