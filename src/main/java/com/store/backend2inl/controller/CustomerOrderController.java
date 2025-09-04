@@ -58,6 +58,6 @@ public class CustomerOrderController {
         @GetMapping("/deleteOrder")
         public String deleteOrder(@RequestParam("orderId") long orderId) {
             customerOrderService.deleteOrder(orderId);
-            return "redirect:/orders";
+            return "orders";
         }
     }
