@@ -8,9 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Service
 public class ApiService {
 
@@ -42,8 +39,6 @@ public class ApiService {
                     if(!productRepository.existsById(p.getId())) {
                         productRepository.save(product);
                     }
-
-                    //System.out.println("Saved product " + p.getTitle());
                 }
             }
         } catch (Exception e) {
