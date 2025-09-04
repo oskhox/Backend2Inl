@@ -3,11 +3,11 @@ import com.store.backend2inl.model.User;
 import com.store.backend2inl.model.CustomerOrder;
 import com.store.backend2inl.model.Product;
 import com.store.backend2inl.repository.CustomerOrderRepository;
-import com.store.backend2inl.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class CustomerOrderService {
@@ -31,4 +31,11 @@ public class CustomerOrderService {
         return customerOrderRepository.save(order);
     }
 
+    public List<CustomerOrder> getAllOrders() {
+        return customerOrderRepository.findAll();
+    }
+
+    public void deleteOrder(long orderId) {
+        customerOrderRepository.deleteById(orderId);
+    }
 }
