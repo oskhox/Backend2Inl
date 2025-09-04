@@ -26,7 +26,7 @@
         <td class="order-field" th:text="${order.getProduct().getTitle()}"></td>
         <td class="order-field" th:text="${order.getOrderDate()}"></td>
         <td class="order-field">
-            <a th:href="@{/products/deleteOrder(id=${order.getId()})}">
+            <a th:href="@{/products/deleteOrder(orderId=${order.getId()})}">
                 <button>Bekräfta radering</button>
             </a>
         </td>
