@@ -2,16 +2,15 @@ package com.store.backend2inl.controller;
 import com.store.backend2inl.model.User;
 import com.store.backend2inl.service.CustomerOrderService;
 import com.store.backend2inl.service.UserService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 
-import java.security.Principal;
 
 @Controller
 @RequestMapping("/products")
@@ -31,9 +30,9 @@ public class CustomerOrderController {
     }
 
     @PostMapping("/{productId}")
-    public String buyProduct(@PathVariable Long productId, Principal principal) {
+    public String buyProduct(@PathVariable Long productId, @AuthenticationPrincipal UserDetails userDetails) {
 
-        User user = userService.findUserByUsername(principal.getName())
+        User user = userService.findUserByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("Användare ej hittad"));
         orderService.buyProduct(user, productId);
 
