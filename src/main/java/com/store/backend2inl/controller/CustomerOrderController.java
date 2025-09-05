@@ -41,7 +41,9 @@ public class CustomerOrderController {
 
     @PostMapping("/orderConfirmation")
     public String completeOrder(Model model) {
-        model.addAttribute("message", "Köp genomfört!");
+        model.addAttribute("pageTitle", "Orderbekräftelse");
+        model.addAttribute("linkProducts", "Tillbaka till produkter");
+        model.addAttribute("message", "Tack för din order!");
         return "orderConfirmation";
     }
 
@@ -51,6 +53,8 @@ public class CustomerOrderController {
             List<CustomerOrder> allOrders = CustomerOrderService.getAllOrders();
             model.addAttribute("orders", allOrders);
             model.addAttribute("pageTitle", "Alla ordrar");
+            model.addAttribute("linkAdmin", "Admin");
+            model.addAttribute("linkProducts", "Produkter");
             return "orders";
         } catch (Exception e) {
             System.err.println("Fel vid hämtning av ordrar: " + e.getMessage());

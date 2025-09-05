@@ -5,8 +5,18 @@
     <title>Admin</title>
 </head>
 <body>
-<h1>Admin</h1>
-<a th:href="@{/products}" >Produkter</a>
-<a th:href="@{/products/orders}" >Ordrar</a>
+
+<header class="customer-header">
+    <h1 class ="custom-h1" th:text="${pageTitle}"></h1>
+
+    <div class="header-links">
+    <a class="custom-link" th:href="@{/products/orders}" th:text="${linkOrders}"></a>
+    </div>
+    <form class="logout-button" th:action="@{/logout}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <input type="submit" value="Logga ut"/>
+    </form>
+
+</header>
 </body>
 </html>

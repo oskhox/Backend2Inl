@@ -41,12 +41,20 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/register","/home", "/login", "/products").permitAll()
+                        .requestMatchers("/register", "/login", "/products").permitAll()
                         .requestMatchers("/admin","/orders").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(login -> login
                         .loginPage("/login")
+                        .successHandler((request, response, authentication) -> {
+                                var authorities = authentication.getAuthorities();
+                                if(authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+                                    response.sendRedirect("/admin");
+                                } else {
+                                    response.sendRedirect("/customer");
+                                }
+                        })
                         .permitAll()
                 )
                 .logout(logout -> logout.permitAll())

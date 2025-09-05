@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+
 </head>
 <body>
-<h2>Registrera</h2>
+<header class="customer-header">
+<h1 class ="custom-h1" th:text="${pageTitle}"></h1>
+</header>
+
 <form th:action="@{/register}" th:object="${user}" method="post">
 
 

@@ -32,23 +32,33 @@ public class UserController {
     @GetMapping("/register")
     public String register(Model model){
         model.addAttribute("user" , new User());
+        model.addAttribute("pageTitle", "Registrera användare");
         return "register";
     }
 
-    @GetMapping("/")
-    public String home() {
-        return "home";
-    }
-
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
+        model.addAttribute("pageTitle", "Logga in");
         return "login";
     }
 
     @GetMapping("/admin")
-    public String admin() {
+    public String admin(Model model) {
+        model.addAttribute("pageTitle", "Admin");
+        model.addAttribute("linkHome", "Startsida");
+        model.addAttribute("linkProducts", "Produkter");
+        model.addAttribute("linkOrders", "Ordrar");
         return "admin";
     }
+
+    @GetMapping("/customer")
+    public String customer(Model model) {
+        model.addAttribute("pageTitle", "Kundprofil");
+        model.addAttribute("linkProducts", "Produkter");
+        return "customer";
+    }
+
+
 
 
 

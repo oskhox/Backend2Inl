@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-<h2>Logga in</h2>
+
+<header class="customer-header">
+    <h1 class ="custom-h1" th:text="${pageTitle}"></h1>
+</header>
+
 <form th:action="@{/login}" method="post">
 
     <p th:if="${error}" th:text="${error}" style="color:red;"></p>
