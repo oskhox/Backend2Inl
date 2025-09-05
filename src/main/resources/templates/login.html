@@ -11,6 +11,7 @@
     <h1 class ="custom-h1" th:text="${pageTitle}"></h1>
 </header>
 
+<div class="login-in">
 <form th:action="@{/login}" method="post">
 
     <p th:if="${error}" th:text="${error}" style="color:red;"></p>
@@ -25,6 +26,6 @@
 </form>
 
 <a href="/register">Registrera</a>
-
+</div>
 </body>
 </html>
