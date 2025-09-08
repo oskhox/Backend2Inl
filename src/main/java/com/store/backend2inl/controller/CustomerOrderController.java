@@ -18,7 +18,7 @@ import org.springframework.ui.Model;
 import java.util.List;
 
 @Controller
-@RequestMapping("/products")
+@RequestMapping("/order")
 public class CustomerOrderController {
 
     private final CustomerOrderService CustomerOrderService;
@@ -47,7 +47,7 @@ public class CustomerOrderController {
         return "orderConfirmation";
     }
 
-    @GetMapping("/orders")
+    @GetMapping("/allOrders")
     public String orders(Model model) {
         try {
             List<CustomerOrder> allOrders = CustomerOrderService.getAllOrders();
@@ -55,17 +55,17 @@ public class CustomerOrderController {
             model.addAttribute("pageTitle", "Alla ordrar");
             model.addAttribute("linkAdmin", "Admin");
             model.addAttribute("linkProducts", "Produkter");
-            return "orders";
+            return "allOrders";
         } catch (Exception e) {
             System.err.println("Fel vid hämtning av ordrar: " + e.getMessage());
             model.addAttribute("errorMessage", "Kunde inte hämta ordrar just nu.");
         }
-        return "orders";
+        return "allOrders";
     }
 
     @GetMapping("/deleteOrder")
     public String deleteOrder(@RequestParam("orderId") long orderId) {
         CustomerOrderService.deleteOrder(orderId);
-        return "redirect:/products/orders";
+        return "redirect:/order/allOrders";
     }
 }

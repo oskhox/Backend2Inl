@@ -6,22 +6,21 @@
     <title>Alla order</title>
 </head>
 <body class="order">
-
 <header class="customer-header">
 
     <header class="customer-header">
-        <h1 class ="custom-h1" th:text="${pageTitle}"></h1>
+        <h1 class="custom-h1" th:text="${pageTitle}"></h1>
 
         <div class="header-links">
-        <a class="custom-link" th:href="@{/products}" th:text="${linkProducts}"></a>
-        <a class="custom-link" th:href="@{/admin}" th:text="${linkAdmin}"></a>
+            <a class="custom-link" th:href="@{/products}" th:text="${linkProducts}"></a>
+            <a class="custom-link" th:href="@{/admin}" th:text="${linkAdmin}"></a>
         </div>
 
         <form class="logout-button" th:action="@{/logout}" method="post">
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
             <input type="submit" value="Logga ut"/>
         </form>
-
+    </header>
 </header>
 
 <table class="order-table">
@@ -43,7 +42,7 @@
         <td class="order-field" th:text="${order.getProduct().getTitle()}"></td>
         <td class="order-field" th:text="${order.getOrderDate()}"></td>
         <td class="order-field">
-            <a th:href="@{/products/deleteOrder(orderId=${order.getId()})}">
+            <a th:href="@{/order/deleteOrder(orderId=${order.getId()})}">
                 <button>Bekräfta radering</button>
             </a>
         </td>
