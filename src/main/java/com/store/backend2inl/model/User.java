@@ -1,12 +1,8 @@
 package com.store.backend2inl.model;
 
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
-
 import java.util.UUID;
 
 @Getter
@@ -29,5 +25,4 @@ public class User {
     @Setter
     @Getter
     private String role;
-
 }

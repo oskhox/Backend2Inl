@@ -1,6 +1,5 @@
 package com.store.backend2inl.service;
 
-
 import com.store.backend2inl.model.User;
 import com.store.backend2inl.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;

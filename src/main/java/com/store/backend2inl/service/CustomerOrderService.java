@@ -21,14 +21,14 @@ public class CustomerOrderService {
     }
 
     @Transactional
-    public CustomerOrder buyProduct(User user, Long productId) {
+    public void buyProduct(User user, Long productId) {
         Product product = productService.getProductById(productId);
         CustomerOrder order = new CustomerOrder();
         order.setUser(user);
         order.setProduct(product);
         order.setOrderDate(LocalDateTime.now());
 
-        return customerOrderRepository.save(order);
+        customerOrderRepository.save(order);
     }
 
     public List<CustomerOrder> getAllOrders() {
