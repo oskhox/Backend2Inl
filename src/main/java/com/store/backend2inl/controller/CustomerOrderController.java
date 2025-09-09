@@ -14,35 +14,33 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
-
 import java.util.List;
 
 @Controller
 @RequestMapping("/order")
 public class CustomerOrderController {
 
-    private final CustomerOrderService CustomerOrderService;
+    private final CustomerOrderService customerOrderService;
     private final UserService userService;
 
-    public CustomerOrderController(CustomerOrderService CustomerOrderService, UserService userService) {
-        this.CustomerOrderService = CustomerOrderService;
+    public CustomerOrderController(CustomerOrderService customerOrderService, UserService userService) {
+        this.customerOrderService = customerOrderService;
         this.userService = userService;
     }
 
     @PostMapping("/{productId}")
     public String buyProduct(@PathVariable Long productId, @AuthenticationPrincipal UserDetails userDetails) {
-
         User user = userService.findUserByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("Användare ej hittad"));
-        CustomerOrderService.buyProduct(user, productId);
 
-        return "/orderConfirmation";
+        customerOrderService.buyProduct(user, productId);
+
+        return "redirect:/order/orderConfirmation";
     }
 
-    @PostMapping("/orderConfirmation")
+    @GetMapping("/orderConfirmation")
     public String completeOrder(Model model) {
         model.addAttribute("pageTitle", "Orderbekräftelse");
-        model.addAttribute("linkProducts", "Tillbaka till produkter");
         model.addAttribute("message", "Tack för din order!");
         return "orderConfirmation";
     }
@@ -50,7 +48,7 @@ public class CustomerOrderController {
     @GetMapping("/allOrders")
     public String orders(Model model) {
         try {
-            List<CustomerOrder> allOrders = CustomerOrderService.getAllOrders();
+            List<CustomerOrder> allOrders = customerOrderService.getAllOrders();
             model.addAttribute("orders", allOrders);
             model.addAttribute("pageTitle", "Alla ordrar");
             model.addAttribute("linkAdmin", "Admin");
@@ -65,7 +63,7 @@ public class CustomerOrderController {
 
     @GetMapping("/deleteOrder")
     public String deleteOrder(@RequestParam("orderId") long orderId) {
-        CustomerOrderService.deleteOrder(orderId);
+        customerOrderService.deleteOrder(orderId);
         return "redirect:/order/allOrders";
     }
 }

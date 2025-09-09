@@ -5,12 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
+import java.util.Collection;
 
 @Configuration
 public class SecurityConfig {
@@ -45,7 +48,7 @@ public class SecurityConfig {
                 .formLogin(login -> login
                         .loginPage("/login")
                         .successHandler((request, response, authentication) -> {
-                                var authorities = authentication.getAuthorities();
+                            Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
                                 if(authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
                                     response.sendRedirect("/admin");
                                 } else {

@@ -79,6 +79,14 @@ html, body {
     margin: 5px 0;
 }
 
+.content-body {
+    margin: 10px;
+}
+
+.order-confirm {
+    padding: 10px;
+}
+
 .product-display-text {
     font-size: 12px;
     overflow: hidden;
