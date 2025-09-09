@@ -57,9 +57,7 @@ public class SecurityConfig {
                         })
                         .permitAll()
                 )
-                .logout(logout -> logout.permitAll())
-                .headers(headers -> headers.disable());
-
+                .logout(logout -> logout.permitAll());
         return http.build();
     }
 }
